@@ -7,152 +7,125 @@
   <meta name="description" content="Robin Pandey — Full Stack Developer (React, .NET Core, MySQL). Open to Work. Portfolio with projects, resume and contact." />
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <meta name="color-scheme" content="dark">
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root{
-      --bg-1:#061021; --bg-2:#071429; --card:#081427; --muted:#9fb0c8;
+      --bg-1:#061021; --bg-2:#071429; --muted:#9fb0c8;
       --accent:#7c3aed; --accent2:#06b6d4; --glass:rgba(255,255,255,0.03);
+      --card-grad: linear-gradient(90deg,var(--accent), var(--accent2));
       --maxw:1200px; --radius:14px; --ease:cubic-bezier(.2,.9,.3,1);
       font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box}
     html,body{height:100%; margin:0; background:linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#e6f3ff}
-    body{display:flex; align-items:center; justify-content:center; padding:28px}
+    body{display:flex; align-items:center; justify-content:center; padding:22px}
 
-    /* Main wrapper */
     .wrap{width:100%; max-width:var(--maxw); border-radius:16px; overflow:hidden;
-          background:
-            radial-gradient(600px 200px at 10% 10%, rgba(124,58,237,0.05), transparent 8%),
-            radial-gradient(400px 150px at 90% 85%, rgba(6,182,212,0.03), transparent 6%),
-            linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-          border:1px solid rgba(255,255,255,0.03); box-shadow: 0 30px 80px rgba(2,6,23,0.65);
+      background:
+        radial-gradient(600px 200px at 10% 10%, rgba(124,58,237,0.05), transparent 8%),
+        radial-gradient(400px 150px at 90% 85%, rgba(6,182,212,0.03), transparent 6%),
+        linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.03); box-shadow: 0 30px 80px rgba(2,6,23,0.65);
     }
 
-    /* Constant sticky mini header with name */
-    .mini-sticky{
-      position:sticky; top:10px; z-index:60; display:flex; justify-content:flex-end;
-      padding:10px 18px; backdrop-filter: blur(6px);
-    }
-    .mini-name{
-      background: linear-gradient(90deg,var(--accent),var(--accent2));
-      color:white; padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 8px 30px rgba(124,58,237,0.15)
-    }
+    .mini-sticky{position:sticky; top:10px; z-index:60; display:flex; justify-content:flex-end; padding:10px 18px; backdrop-filter: blur(6px);}
+    .mini-name{background: var(--card-grad); color:white; padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 8px 30px rgba(124,58,237,0.15)}
 
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:14px 22px; border-bottom:1px solid rgba(255,255,255,0.02);
-      backdrop-filter: blur(6px);
-      position:relative;
-      background:linear-gradient(180deg, rgba(6,10,17,0.55), rgba(6,10,17,0.35));
-    }
-
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 22px; border-bottom:1px solid rgba(255,255,255,0.02); backdrop-filter: blur(6px); position:relative; background:linear-gradient(180deg, rgba(6,10,17,0.55), rgba(6,10,17,0.35));}
     .brand{display:flex; gap:12px; align-items:center}
-    .logo{width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; color:white; background:linear-gradient(135deg,var(--accent), #4f46e5)}
-    .brand h1{font-size:16px; margin:0}
-    .brand p{margin:0; color:var(--muted); font-size:13px}
-
-    /* Desktop nav */
+    .logo{width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; color:white; background:linear-gradient(135deg,var(--accent), #4f46e5); box-shadow: 0 10px 28px rgba(79,70,229,0.14)}
     nav{display:flex; gap:10px; align-items:center}
     nav a{color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; font-weight:700; position:relative}
     nav a:hover{color:white}
-    nav a::after{content:""; position:absolute; left:12px; right:12px; height:3px; bottom:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:6px; transform-origin:left; transform:scaleX(0); transition:transform .28s var(--ease)}
+    nav a::after{content:""; position:absolute; left:12px; right:12px; height:3px; bottom:6px; background:var(--card-grad); border-radius:6px; transform-origin:left; transform:scaleX(0); transition:transform .28s var(--ease)}
     nav a:hover::after{transform:scaleX(1)}
+    .cta-resume{background:var(--card-grad); color:white; padding:9px 14px; border-radius:10px; font-weight:800; text-decoration:none}
 
-    .cta-resume{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white; padding:9px 14px; border-radius:10px; font-weight:800; text-decoration:none}
-
-    /* mobile hamburger */
     .hamb{display:none; width:44px; height:44px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03); align-items:center; justify-content:center}
     .hamb span{display:block; width:18px; height:2px; background:var(--muted); border-radius:2px}
     .hamb span+span{margin-top:5px}
     .mobile-menu{display:none; position:absolute; right:18px; top:64px; padding:12px; background:linear-gradient(180deg, rgba(3,7,18,0.96), rgba(3,7,18,0.9)); border-radius:12px; box-shadow:0 20px 40px rgba(2,6,23,0.6)}
     .mobile-menu a{display:block; padding:10px; color:var(--muted); text-decoration:none; border-radius:8px}
     .mobile-menu a:hover{color:white; background:rgba(255,255,255,0.02)}
-
     @media (max-width:1000px){ nav{display:none} .hamb{display:flex} }
 
-    /* layout: hero two-column responsive */
     .hero{display:grid; grid-template-columns:430px 1fr}
     @media (max-width:980px){ .hero{grid-template-columns:1fr} header{padding:12px} }
 
-    /* left column (hero/profile) */
     .left{padding:36px; min-height:520px; display:flex; flex-direction:column; gap:16px}
-    .avatar{
-      width:140px; height:140px; border-radius:18px; background:linear-gradient(180deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:32px; color:white; box-shadow:0 18px 50px rgba(79,70,229,0.16); overflow:hidden;
-      transition: transform .6s var(--ease);
-    }
+    .avatar{width:140px; height:140px; border-radius:18px; background:linear-gradient(180deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:32px; color:white; box-shadow:0 18px 50px rgba(79,70,229,0.16); overflow:hidden; transition: transform .6s var(--ease);}
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-
     .open-badge{display:inline-block; padding:8px 12px; background: linear-gradient(90deg,#10b981,#06b6d4); color:white; border-radius:999px; font-weight:800; font-size:13px}
-
     .name{font-size:28px; font-weight:900; margin-top:10px}
     .roles{color:var(--muted); font-weight:700; margin-top:6px}
     .hero-desc{margin-top:12px; color:#dbeafe; font-weight:600; line-height:1.5}
-
     .left-actions{margin-top:14px; display:flex; gap:12px; flex-wrap:wrap}
     .btn{padding:10px 14px; border-radius:10px; font-weight:800; text-decoration:none; display:inline-flex; gap:10px; align-items:center}
     .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white}
     .btn-ghost{border:1px solid rgba(255,255,255,0.04); color:var(--muted); background:transparent}
-
     .left-foot{margin-top:auto; color:var(--muted); font-size:14px}
     .left-foot a{color:inherit; text-decoration:none; display:block; margin-top:8px}
 
-    /* right column: content sections (will show/hide) */
     .right{padding:28px 36px}
     .kicker{color:var(--accent2); font-weight:800; letter-spacing:0.9px}
     .title{font-size:30px; color:white; margin-top:8px; font-weight:900}
     .subtitle{color:#cfe8ff; margin-top:8px; font-weight:700}
     .lead{color:var(--muted); margin-top:14px; font-size:15px; max-width:70ch}
 
-    /* sections base */
     .section{margin-top:20px; display:none}
     .section.active{display:block}
     .section h2{margin:0; font-size:20px; color:white}
 
-    /* projects grid */
-    .projects-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:14px}
-    @media (max-width:1100px){ .projects-grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:680px){ .projects-grid{grid-template-columns:1fr} }
+    /* --- Projects scroll area fix & styling --- */
+    #projects-area {
+      margin-top:12px;
+      /* make the projects area scrollable and capped so layout won't break */
+      max-height: 56vh;           /* comfortable on laptop / tablet / mobile */
+      overflow-y: auto;
+      padding-right: 8px;         /* space for scrollbar */
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    /* Responsive grid inside the scrollable container */
+    @media (max-width:1100px) { #projects-area { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width:680px) { #projects-area { grid-template-columns: 1fr; max-height: 60vh; } }
 
-    .repo-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); transition: transform .28s var(--ease), box-shadow .28s var(--ease); position:relative; overflow:hidden}
-    .repo-card:hover{transform:translateY(-8px); box-shadow:0 20px 40px rgba(2,6,23,0.55)}
-    .repo-title{font-weight:800}
-    .repo-desc{color:var(--muted); margin-top:8px; min-height:44px}
+    /* custom scrollbar (webkit) */
+    #projects-area::-webkit-scrollbar{ width:9px }
+    #projects-area::-webkit-scrollbar-thumb{ background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); border-radius:999px; border:1px solid rgba(255,255,255,0.02) }
+    #projects-area::-webkit-scrollbar-track{ background:transparent }
+
+    .repo-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); transition: transform .28s var(--ease), box-shadow .28s var(--ease); position:relative; overflow:hidden; display:flex; flex-direction:column; min-height:140px}
+    .repo-card:hover{transform:translateY(-8px) rotateX(.5deg); box-shadow:0 26px 46px rgba(2,6,23,0.6)}
+    .repo-title{font-weight:800; font-size:15px; color:#e6f7ff}
+    .repo-desc{color:var(--muted); margin-top:8px; flex:1; font-size:14px}
     .repo-meta{margin-top:10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
     .repo-lang{background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px; font-weight:800; color:#cfe8ff; font-size:13px}
     .repo-links{margin-left:auto; display:flex; gap:8px}
-    .repo-links a{color:var(--muted); text-decoration:none; font-weight:800; padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03)}
+    .repo-links a{color:var(--muted); text-decoration:none; font-weight:700; padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03)}
+    .repo-rating{display:flex; gap:4px; align-items:center; color:#ffd166; font-size:14px; font-weight:800}
 
-    .repo-overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.28)); opacity:0; transition:opacity .22s var(--ease); display:flex; align-items:center; justify-content:center; padding:12px; text-align:center}
-    .repo-card:hover .repo-overlay{opacity:1}
+    /* ability to show a small ribbon for resume-sourced projects */
+    .from-resume{position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.03); color:#dbeafe; padding:6px 8px; border-radius:8px; font-weight:700; font-size:12px; backdrop-filter: blur(4px)}
 
-    /* about details (training & qualification) */
     .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px}
     @media (max-width:900px){ .about-grid{grid-template-columns:1fr} }
     .box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); color:var(--muted)}
     .box strong{color:#e6f3ff}
 
-    /* contact icons row */
     .contact-row{display:flex; gap:12px; margin-top:12px; align-items:center}
     .icon{width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.02); color:#cfe8ff; font-weight:800; text-decoration:none}
 
-    /* footer */
     footer{margin-top:26px; padding:18px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02)}
-
-    /* focus for accessibility */
     :focus{outline:2px solid rgba(124,58,237,0.25); outline-offset:3px}
-
-    /* reduced motion */
     @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
   </style>
 </head>
 <body>
   <div class="wrap" role="main" aria-live="polite">
-    <!-- sticky mini header with name -->
     <div class="mini-sticky"><div class="mini-name">Robin Pandey</div></div>
 
-    <!-- main header/nav -->
     <header>
       <div class="brand">
         <div class="logo" aria-hidden="true">RP</div>
@@ -180,13 +153,10 @@
       </div>
     </header>
 
-    <!-- hero area: left + right -->
     <div class="hero">
-      <!-- LEFT: profile + CTA -->
       <aside class="left" aria-labelledby="hero-name">
         <div style="display:flex; gap:16px; align-items:center">
-          <div class="avatar" id="avatar" aria-hidden="false">
-            <!-- if you add assets/avatar.jpg it will show -->
+          <div class="avatar" id="avatar">
             <img id="avatar-img" src="" alt="" style="display:none">
             <span id="avatar-initials">RP</span>
           </div>
@@ -213,17 +183,14 @@
         </div>
       </aside>
 
-      <!-- RIGHT: content sections -->
       <main class="right" id="content" aria-live="polite">
-        <!-- HOME (visible by default) -->
         <section id="home" class="section active" aria-labelledby="home-title">
           <div class="kicker">Welcome</div>
           <h2 id="home-title" class="title">Hi — I'm Robin. I build web apps that scale.</h2>
           <div class="subtitle">Real-time features, clean APIs, and thoughtful UI/UX</div>
-          <p class="lead">Explore my projects and experience. Click Projects to fetch my GitHub repos live, or download my resume. I focus on production-ready solutions with clean architecture and a strong emphasis on user experience.</p>
+          <p class="lead">Explore my projects and experience. Projects are fetched live from GitHub and can also include projects exported from your resume.</p>
         </section>
 
-        <!-- ABOUT -->
         <section id="about" class="section" aria-labelledby="about-title">
           <h2 id="about-title">About me</h2>
           <p style="margin-top:10px; color:var(--muted)">I am a creative, detail-oriented Full Stack Developer and a good learner with strong problem-solving skills. I enjoy building both front-end experiences and robust back-end systems, and I am comfortable working across the full stack.</p>
@@ -231,9 +198,7 @@
           <div class="about-grid" style="margin-top:14px">
             <div class="box">
               <strong>Summary</strong>
-              <p style="margin-top:8px; color:var(--muted)">
-                Full Stack Developer & Project Engineer skilled in React.js, .NET Core (C#) and MySQL. Experienced in developing scalable, user-friendly web apps with clean architecture and CI/CD pipelines.
-              </p>
+              <p style="margin-top:8px; color:var(--muted)">Full Stack Developer & Project Engineer skilled in React.js, .NET Core (C#) and MySQL. Experienced in developing scalable, user-friendly web apps with clean architecture and CI/CD pipelines.</p>
             </div>
 
             <div class="box">
@@ -245,22 +210,26 @@
                 <li>Backend Development — Coders Academy</li>
                 <li>ChatGPT Certificate Course — Great Learning</li>
               </ul>
-              <div style="margin-top:8px; font-size:12px; color:var(--muted)">(Training & certifications taken from resume) :contentReference[oaicite:1]{index=1}</div>
             </div>
           </div>
         </section>
 
-        <!-- PROJECTS -->
         <section id="projects" class="section" aria-labelledby="projects-title">
-          <h2 id="projects-title">Projects (fetched from GitHub)</h2>
-          <p style="color:var(--muted); margin-top:8px">Repositories are fetched live from <strong>github.com/R0bin-Pandey</strong>. Hover on a repo to read its description and click to open.</p>
-          <div id="projects-area" class="projects-grid" style="margin-top:12px">
-            <!-- repo cards injected here -->
+          <h2 id="projects-title">Projects (live + resume)</h2>
+          <p style="color:var(--muted); margin-top:8px">Repositories fetched from <strong>github.com/R0bin-Pandey</strong>. Resume projects (if provided) are merged below.</p>
+
+          <!-- IMPORTANT: if you want to include projects from your resume,
+               create a JSON file at assets/resume-projects.json with this structure:
+               [
+                 { "name": "Project from Resume", "description": "Short desc", "language": "C#", "url":"https://github.com/your/repo", "rating": 4 }
+               ]
+               The script below will merge those entries with GitHub repos.
+          -->
+          <div id="projects-area" aria-live="polite">
             <div style="grid-column:1/-1; color:var(--muted)" id="repo-loading">Loading repositories…</div>
           </div>
         </section>
 
-        <!-- CONTACT -->
         <section id="contact" class="section" aria-labelledby="contact-title">
           <h2 id="contact-title">Contact</h2>
           <p style="color:var(--muted); margin-top:8px">Available for full-time and remote roles. Open to freelance and collaborations.</p>
@@ -280,37 +249,36 @@
   </div>
 
   <script>
-    /***************
-      Behavior & JS
-    ***************/
+    /********************
+     Behavior & JS
+     ********************/
 
-    // Utility: show one section, hide others
+    // -- Section show/hide utility
     function showSection(id){
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       const sec = document.getElementById(id);
       if(sec) sec.classList.add('active');
-      // update nav active state
       document.querySelectorAll('.nav-link').forEach(a => {
         if(a.dataset.show === id) a.style.opacity = '1'; else a.style.opacity = '0.75';
       });
-      // scroll content to top of content area
+      // hide mobile menu if open
+      closeMobile();
+      // if projects, prefetch
+      if(id === 'projects') fetchRepos();
+      // scroll content top
       document.getElementById('content').scrollTop = 0;
     }
 
-    // attach nav links (desktop + left CTAs)
+    // nav link handlers (desktop + CTA)
     document.querySelectorAll('.nav-link').forEach(a=>{
       a.addEventListener('click', (e)=>{
         e.preventDefault();
         const id = a.dataset.show;
         showSection(id);
-        // if projects -> fetch github repos
-        if(id === 'projects') fetchRepos();
-        // close mobile menu if open
-        closeMobile();
       });
     });
 
-    // Mobile menu toggle
+    // mobile toggles
     const hamb = document.querySelector('.hamb'), mobileMenu = document.querySelector('.mobile-menu');
     function closeMobile(){ mobileMenu.style.display = 'none'; hamb.setAttribute('aria-expanded','false') }
     hamb.addEventListener('click', ()=> {
@@ -318,101 +286,153 @@
       hamb.setAttribute('aria-expanded', String(!open));
       mobileMenu.style.display = open ? 'none' : 'block';
     });
+    document.addEventListener('click', (e)=>{ if(!mobileMenu.contains(e.target) && !hamb.contains(e.target) && mobileMenu.style.display === 'block') closeMobile(); });
 
-    // close mobile if click outside
-    document.addEventListener('click', (e)=>{
-      if(!mobileMenu.contains(e.target) && !hamb.contains(e.target) && mobileMenu.style.display === 'block') closeMobile();
-    });
-
-    // Avatar: if assets/avatar.jpg exists, load it; otherwise show initials
+    // Avatar load (if you put assets/avatar.jpg it will show)
     (function loadAvatar(){
       const img = document.getElementById('avatar-img');
       const initials = document.getElementById('avatar-initials');
-      img.src = 'assets/avatar.jpg'; // if you add an avatar file, it will show
+      img.src = 'assets/avatar.jpg';
       img.onload = ()=>{ img.style.display='block'; initials.style.display='none'; };
       img.onerror = ()=>{ img.style.display='none'; initials.style.display='block'; };
     })();
 
-    // Fetch GitHub repos and render (public API)
+    // --- Repos fetch + merge with resume JSON ---
+    // Behavior:
+    // 1) fetch GitHub public repos for user R0bin-Pandey
+    // 2) attempt to fetch local resume-projects JSON (assets/resume-projects.json)
+    // 3) merge resume projects on top (resume projects appear first and labeled)
+    // 4) render cards inside #projects-area (which is scrollable)
+    let reposLoaded = false;
     async function fetchRepos(){
       const area = document.getElementById('projects-area');
       const loading = document.getElementById('repo-loading');
-      loading.textContent = 'Loading repositories from GitHub…';
-      // prevent multiple loads
-      if(area.dataset.loaded === 'true') { loading.style.display='none'; return; }
+      if(!area) return;
+      loading && (loading.textContent = 'Loading repositories…');
 
-      try{
+      if(reposLoaded) { loading && (loading.style.display='none'); return; }
+
+      try {
+        // fetch resume projects (local JSON) first (optional)
+        let resumeProjects = [];
+        try {
+          const rres = await fetch('assets/resume-projects.json', { cache: 'no-store' });
+          if(rres.ok){
+            resumeProjects = await rres.json();
+            // normalize resumeProjects to include fields: name, description, url, language, rating (optional)
+            if(!Array.isArray(resumeProjects)) resumeProjects = [];
+          }
+        } catch(e){ /* no resume JSON found or parse error — ignore */ }
+
+        // fetch GitHub repos
         const resp = await fetch('https://api.github.com/users/R0bin-Pandey/repos?per_page=100&sort=updated');
         if(!resp.ok) throw new Error('GitHub API error ' + resp.status);
         const repos = await resp.json();
-        // optionally filter forks / private
-        const filtered = repos.filter(r => !r.fork).slice(0, 12); // show up to 12
-        area.innerHTML = '';
-        if(filtered.length === 0){ area.innerHTML = '<div style="grid-column:1/-1;color:var(--muted)">No public repositories found.</div>'; area.dataset.loaded='true'; return; }
+        const filtered = Array.isArray(repos) ? repos.filter(r => !r.fork) : [];
 
-        filtered.forEach(r=>{
-          const el = document.createElement('article');
-          el.className = 'repo-card';
-          el.innerHTML = `
-            <div class="repo-title">${escapeHTML(r.name)}</div>
-            <div class="repo-desc">${escapeHTML(r.description || 'No description — click to open repository.')}</div>
-            <div class="repo-meta">
-              ${r.language ? `<div class="repo-lang">${escapeHTML(r.language)}</div>` : ''}
-              <div style="color:var(--muted); font-weight:700; font-size:13px">⭐ ${r.stargazers_count}</div>
+        // convert GitHub repos into unified project objects
+        const ghProjects = filtered.map(r => ({
+          source: 'github',
+          name: r.name,
+          description: r.description || 'No description provided.',
+          language: r.language || '',
+          stars: r.stargazers_count || 0,
+          url: r.html_url,
+          homepage: r.homepage || ''
+        }));
+
+        // map resumeProjects to unified objects (resumeProjects may include rating)
+        const resumeMapped = resumeProjects.map(p => ({
+          source: 'resume',
+          name: p.name || 'Unnamed Project',
+          description: p.description || '',
+          language: p.language || '',
+          rating: Number(p.rating) || null,
+          url: p.url || '#'
+        }));
+
+        // final projects array: resume ones first, then GH (avoid duplicates by name)
+        const names = new Set(resumeMapped.map(x=>x.name.toLowerCase()));
+        const combined = [...resumeMapped, ...ghProjects.filter(g => !names.has(g.name.toLowerCase()))];
+
+        // render
+        area.innerHTML = '';
+        if(combined.length === 0){
+          area.innerHTML = '<div style="grid-column:1/-1;color:var(--muted)">No projects found (GitHub or resume JSON).</div>';
+          reposLoaded = true;
+          return;
+        }
+
+        combined.forEach(p => {
+          const card = document.createElement('article');
+          card.className = 'repo-card';
+          // rating: if resume provided, use rating; otherwise derive from stars => 1..5 scale
+          let rating = p.rating || 0;
+          if(!rating){
+            const stars = p.stars || 0;
+            rating = Math.min(5, Math.max(1, Math.ceil(stars / 10))); // 0-10 =>1, 11-20=>2, etc.
+          }
+          // build star string
+          const starFull = '★', starEmpty = '☆';
+          const starHtml = Array.from({length:5}, (_,i) => i < rating ? `<span style="color:#ffd166">${starFull}</span>` : `<span style="opacity:0.18">${starEmpty}</span>`).join('');
+
+          card.innerHTML = `
+            ${p.source === 'resume' ? '<div class="from-resume">Resume</div>' : ''}
+            <div class="repo-title">${escapeHTML(p.name)}</div>
+            <div class="repo-desc">${escapeHTML(p.description)}</div>
+            <div class="repo-meta" aria-hidden="true">
+              ${p.language ? `<div class="repo-lang">${escapeHTML(p.language)}</div>` : ''}
+              <div class="repo-rating" title="Rating">${starHtml}</div>
               <div class="repo-links" style="margin-left:auto">
-                <a href="${r.html_url}" target="_blank" rel="noopener">View</a>
-                ${r.homepage ? `<a href="${r.homepage}" target="_blank" rel="noopener">Demo</a>` : ''}
+                ${p.url ? `<a href="${p.url}" target="_blank" rel="noopener">Open</a>` : ''}
+                ${p.homepage ? `<a href="${p.homepage}" target="_blank" rel="noopener">Demo</a>` : ''}
               </div>
             </div>
-            <div class="repo-overlay" aria-hidden="true"><div style="max-width:90%; color:#e6f3ff; font-weight:700">${escapeHTML(r.description || 'No description available.')}</div></div>
           `;
-          // hover shows overlay (CSS handles), add keyboard accessibility (show overlay on focus)
-          el.tabIndex = 0;
-          el.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') window.open(r.html_url, '_blank'); });
-          area.appendChild(el);
+          // keyboard accessibility: Enter opens URL
+          card.tabIndex = 0;
+          card.addEventListener('keypress', (e)=>{ if(e.key === 'Enter' && p.url) window.open(p.url, '_blank'); });
+
+          // subtle tilt on mouse (light)
+          card.addEventListener('mousemove', ev=>{
+            const r = card.getBoundingClientRect(), x = (ev.clientX - r.left)/r.width - 0.5, y = (ev.clientY - r.top)/r.height - 0.5;
+            card.style.transform = `perspective(800px) rotateX(${ -y * 4 }deg) rotateY(${ x * 4 }deg) translateZ(0)`;
+          });
+          card.addEventListener('mouseleave', ()=> card.style.transform = '');
+
+          area.appendChild(card);
         });
-        area.dataset.loaded = 'true';
-      }catch(err){
+
+        reposLoaded = true;
+        loading && (loading.style.display='none');
+      } catch(err){
         area.innerHTML = `<div style="grid-column:1/-1; color:#fca5a5">Failed to load repositories: ${escapeHTML(err.message)}</div>`;
-      } finally {
-        if(loading) loading.style.display='none';
+        reposLoaded = true;
       }
     }
 
-    // Simple escape to avoid injected strings
-    function escapeHTML(s){
-      return String(s).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])});
-    }
+    // simple escape
+    function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-    // On first load, show home. If user clicks projects in header it will fetch.
+    // on first load
     showSection('home');
 
-    // Simple card tilt effect for repo-cards (delegate after fetch)
-    document.addEventListener('mouseover', (e) => {
-      const card = e.target.closest('.repo-card');
-      if(!card) return;
-      card.addEventListener('mousemove', tilt);
-      card.addEventListener('mouseleave', resetTilt);
-      function tilt(ev){
-        const r = card.getBoundingClientRect(), x = (ev.clientX - r.left)/r.width - 0.5, y = (ev.clientY - r.top)/r.height - 0.5;
-        card.style.transform = `perspective(800px) rotateX(${ -y * 6 }deg) rotateY(${ x * 6 }deg) translateZ(0)`;
-      }
-      function resetTilt(){ card.style.transform = ''; card.removeEventListener('mousemove', tilt); card.removeEventListener('mouseleave', resetTilt); }
+    // prefetch when hovering projects link
+    document.querySelectorAll('[data-show="projects"]').forEach(n=>{
+      n.addEventListener('mouseenter', ()=>{ if(!reposLoaded) fetchRepos(); });
     });
 
-    // keyboard: close mobile menu on Escape
+    // close mobile on escape
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMobile(); });
 
-    // Optionally prefetch repos when user hovers Projects nav (better UX)
-    document.querySelectorAll('[data-show="projects"]').forEach(n=>{
-      n.addEventListener('mouseenter', ()=>{ if(document.getElementById('projects-area').dataset.loaded !== 'true') fetchRepos(); });
-    });
-
-    // When page loads, ensure sections hidden/shown are correct for back/forward navigation if user uses history
+    // handle popstate (hash optional)
     window.addEventListener('popstate', ()=> {
       const id = location.hash?.replace('#','') || 'home';
       showSection(id);
     });
+
+    // Accessibility: ensure mobile nav closes when resizing
+    window.addEventListener('resize', ()=> { if(window.innerWidth > 1000) closeMobile(); });
 
   </script>
 </body>
