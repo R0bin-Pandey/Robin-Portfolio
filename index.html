@@ -4,365 +4,405 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Robin Pandey — Full Stack Developer</title>
-  <meta name="description" content="Robin Pandey — Full Stack Developer (React, .NET Core, MySQL). Portfolio with projects, resume and contact.">
+  <meta name="description" content="Robin Pandey — Full Stack Developer (React, .NET Core, MySQL). Portfolio with projects, resume and contact." />
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ============================
+       VARIABLES & BASE
+       ============================ */
     :root{
-      --bg:#0f172a; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed; --accent-2:#06b6d4;
-      --glass: rgba(255,255,255,0.04);
-      --maxw:1100px; --radius:14px; --gap:18px;
+      --bg-1: #061021;
+      --bg-2: #08132a;
+      --card:#071627;
+      --muted:#9fb0c8;
+      --accent:#7c3aed;         /* purple */
+      --accent-2:#06b6d4;      /* teal */
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius:14px;
+      --maxw:1200px;
+      --ease: cubic-bezier(.2,.9,.3,1);
       font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; background: linear-gradient(180deg,#071023 0%, #061021 55%, #07122b 100%);
-      color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      display:flex; align-items:flex-start; justify-content:center; padding:32px;
+      margin:0; background: linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+      color:#e6f3ff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      display:flex; align-items:flex-start; justify-content:center; padding:28px;
+      line-height:1.45;
     }
 
-    /* Layout */
-    .wrap{width:100%; max-width:var(--maxw); border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03);}
-    header{position:sticky; top:18px; z-index:40; backdrop-filter: blur(6px); background: linear-gradient(180deg, rgba(6,10,17,0.6), rgba(6,10,17,0.45)); padding:14px 20px; display:flex; align-items:center; justify-content:space-between}
+    .wrap{
+      width:100%; max-width:var(--maxw); border-radius:18px; overflow:hidden;
+      box-shadow: 0 30px 80px rgba(5,9,18,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+      background:
+        radial-gradient(600px 200px at 10% 10%, rgba(124,58,237,0.06), transparent 8%),
+        radial-gradient(400px 150px at 90% 85%, rgba(6,182,212,0.03), transparent 6%),
+        linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    }
+
+    /* ============================
+       HEADER / NAV
+       ============================ */
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 22px; gap:12px;
+      position:sticky; top:22px; z-index:50; backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(6,10,17,0.55), rgba(6,10,17,0.35));
+      border-bottom:1px solid rgba(255,255,255,0.02);
+    }
     .brand{display:flex; align-items:center; gap:12px}
-    .logo{width:44px; height:44px; border-radius:10px; background: linear-gradient(135deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; color:white;}
-    .brand h1{font-size:16px; margin:0}
-    nav{display:flex; align-items:center; gap:14px}
-    nav a{color:var(--muted); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:8px; position:relative}
-    nav a:hover{color:#fff}
-    /* animated underline */
-    nav a::after{content:""; position:absolute; left:12px; right:12px; height:2px; bottom:6px; background:transparent; border-radius:2px; transform-origin:left; transform:scaleX(0); transition: transform .28s cubic-bezier(.2,.9,.3,1)}
-    nav a:hover::after{background:linear-gradient(90deg,var(--accent),var(--accent-2)); transform:scaleX(1)}
-
-    /* hamburger for mobile */
-    .hamburger{display:none; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03)}
-    .hamburger span{display:block; width:18px; height:2px; background:var(--muted); border-radius:2px; transition: all .25s}
-    .hamburger span:nth-child(2){margin:5px 0}
-    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .hamburger.open span:nth-child(2){opacity:0}
-    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-    /* hero + content */
-    .hero{
-      display:grid; grid-template-columns: 420px 1fr; gap:0; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    .logo{
+      width:46px; height:46px; border-radius:12px;
+      background: linear-gradient(135deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:18px; color:white; box-shadow: 0 10px 30px rgba(124,58,237,0.16);
     }
-    @media (max-width:920px){ .hero{grid-template-columns:1fr} header nav{display:none} .hamburger{display:flex} }
+    .brand .who{font-size:14px; font-weight:700}
+    .brand .role{font-size:12px; color:var(--muted)}
+
+    nav{display:flex; gap:10px; align-items:center}
+    nav a{
+      color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:650; font-size:14px;
+      position:relative;
+    }
+    nav a:hover{color:#fff}
+    nav a::after{
+      content:""; position:absolute; left:12px; right:12px; height:3px; bottom:4px; background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border-radius:4px; transform:scaleX(0); transform-origin:left; transition: transform .28s var(--ease);
+      opacity:0.95;
+    }
+    nav a:hover::after{ transform:scaleX(1) }
+
+    .nav-cta{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:10px; font-weight:700; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; text-decoration:none}
+
+    /* mobile hamburger */
+    .hambtn{display:none; width:44px; height:44px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; align-items:center; justify-content:center; cursor:pointer}
+    .hambtn span{display:block; width:18px; height:2px; background:var(--muted); border-radius:2px}
+    .hambtn span+span{margin-top:5px}
+    .mobile-nav{
+      display:none; position:fixed; right:18px; top:86px; background:linear-gradient(180deg, rgba(3,7,18,0.95), rgba(3,7,18,0.9));
+      padding:12px; border-radius:12px; box-shadow:0 20px 60px rgba(2,6,23,0.6);
+    }
+    .mobile-nav a{display:block; padding:8px 10px; color:var(--muted); text-decoration:none; border-radius:8px}
+    .mobile-nav a:hover{color:white; background:rgba(255,255,255,0.02)}
+
+    /* ============================
+       HERO / LAYOUT
+       ============================ */
+    .hero{
+      display:grid; grid-template-columns: 420px 1fr; gap:0;
+    }
+    @media (max-width:1000px){ .hero{grid-template-columns: 1fr} header nav{display:none} .hambtn{display:flex} }
 
     /* left panel */
-    .left{padding:36px; background: linear-gradient(135deg,#071225 0%, #0b1220 100%); min-height:520px; display:flex; flex-direction:column; gap:18px}
-    .avatar{width:118px; height:118px; border-radius:16px; background: linear-gradient(180deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:34px; color:white; box-shadow: 0 10px 30px rgba(124,58,237,0.18)}
-    .name{font-size:22px; font-weight:700}
-    .role{color:var(--muted); margin-top:6px; font-weight:600}
-    .headline{margin-top:10px; font-size:16px; line-height:1.4; color:#dbeafe}
-    .cta-row{display:flex; gap:12px; margin-top:12px; flex-wrap:wrap}
-    .btn{
-      --pad-y:10px; --pad-x:16px;
-      display:inline-flex; align-items:center; gap:10px; padding:var(--pad-y) var(--pad-x); border-radius:12px; cursor:pointer; border:0; font-weight:700; text-decoration:none;
-      transition: transform .18s ease, box-shadow .18s ease;
+    .left{
+      padding:34px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      min-height:540px; display:flex; flex-direction:column; gap:14px;
     }
-    .btn:active{transform:translateY(1px)}
-    .btn-solid{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; box-shadow:0 6px 20px rgba(99,102,241,0.16)}
-    .btn-ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04)}
+    .profile{
+      display:flex; gap:14px; align-items:center;
+    }
+    .avatar{
+      width:112px; height:112px; border-radius:16px; background:linear-gradient(180deg,var(--accent), #4f46e5);
+      display:flex; align-items:center; justify-content:center; font-weight:800; font-size:36px; color:white;
+      box-shadow: 0 16px 40px rgba(79,70,229,0.14);
+      flex-shrink:0;
+      overflow:hidden;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block}
+    .whoami{display:flex; flex-direction:column}
+    .whoami .name{font-size:20px; font-weight:800}
+    .whoami .subtitle{color:var(--muted); font-weight:600; margin-top:4px}
 
-    .meta-list{margin-top:auto; color:var(--muted); font-size:14px}
-    .meta-list a{color:inherit; text-decoration:none; display:block; margin-top:8px}
+    .bio{margin-top:12px; color:#dbeafe; font-weight:600; font-size:15px; line-height:1.4}
+    .badges{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap}
+    .badge{padding:8px 10px; border-radius:999px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:#cfe8ff; font-weight:700; font-size:13px; border:1px solid rgba(255,255,255,0.02)}
+
+    .left .contact{margin-top:auto; color:var(--muted); font-size:14px}
+    .left .contact a{color:inherit; display:block; text-decoration:none; margin-top:8px}
 
     /* right panel */
     .right{padding:28px 34px}
-    .kicker{color:var(--accent-2); font-weight:700; font-size:13px; letter-spacing:0.8px}
-    .title{font-size:28px; color:white; margin-top:6px; font-weight:800}
-    .typewriter{color:#cfe8ff; opacity:0.95; margin-top:8px; font-weight:600}
-    .intro{margin-top:14px; color:var(--muted); line-height:1.6}
+    .kicker{color:var(--accent-2); font-weight:800; letter-spacing:1px; font-size:12px}
+    .title{font-size:36px; color:white; margin-top:8px; font-weight:900}
+    .subtitle{color:#cfe8ff; margin-top:10px; font-weight:700}
+    .lead{color:var(--muted); margin-top:16px; font-size:15px; max-width:70ch}
 
-    /* cards grid */
-    .projects{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:20px}
+    /* projects grid */
+    .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px}
     @media (max-width:1100px){ .projects{grid-template-columns:repeat(2,1fr)} }
     @media (max-width:640px){ .projects{grid-template-columns:1fr} }
 
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.03);
-      transform:translateY(0); transition: transform .32s cubic-bezier(.2,.9,.3,1), box-shadow .32s;
-      position:relative; overflow:hidden; cursor:default;
+    .project{
+      position:relative; border-radius:12px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03); padding:14px; transition: transform .36s var(--ease), box-shadow .36s var(--ease);
+      display:flex; flex-direction:column; min-height:160px;
     }
-    .card:hover{ transform:translateY(-10px); box-shadow:0 20px 40px rgba(2,6,23,0.6) }
-    .card .p-title{font-weight:700; font-size:15px; color:#e6f2ff}
-    .card .p-sub{font-size:13px; color:var(--muted); margin-top:8px}
-    .tag{display:inline-block; padding:6px 8px; border-radius:999px; background:rgba(100,116,139,0.08); color:#cfe8ff; font-weight:700; font-size:12px; margin-right:8px}
+    .project:hover{ transform: translateY(-10px) scale(1.01); box-shadow: 0 30px 60px rgba(2,6,23,0.6) }
 
-    /* subtle tilt effect helpers */
-    .card .shine{position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg, rgba(255,255,255,0.02), transparent 40%); mix-blend-mode:overlay; transform:translateX(-60%); transition:transform .6s ease}
-    .card:hover .shine{transform:translateX(0%)}
+    .project .img{
+      height:120px; border-radius:10px; overflow:hidden; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      display:flex; align-items:center; justify-content:center; margin-bottom:12px; border:1px solid rgba(255,255,255,0.02)
+    }
+    .project img{width:100%; height:100%; object-fit:cover; display:block}
 
-    /* buttons inside cards */
-    .card .actions{display:flex; gap:10px; margin-top:12px}
-    .small-btn{padding:8px 12px; border-radius:10px; font-weight:700; font-size:13px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); text-decoration:none}
-    .small-btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; border:0}
+    .p-title{font-weight:800; font-size:15px; color:#e6f7ff}
+    .p-desc{color:var(--muted); margin-top:8px; font-size:13px; flex:1}
+    .p-tags{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap}
+    .ptag{font-size:12px; padding:6px 8px; border-radius:999px; background:rgba(255,255,255,0.02); color:#cfe8ff; font-weight:700}
 
-    /* contact card and footer */
-    .contact{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
-    .contact .card{flex:1 1 260px}
+    .p-actions{display:flex; gap:8px; margin-top:12px}
+    .link-btn{padding:9px 12px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); text-decoration:none; font-weight:800}
+    .link-btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; border:0}
 
-    footer{margin-top:28px; color:var(--muted); font-size:13px; text-align:center}
+    /* skills + contact */
+    .split{display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:22px}
+    @media (max-width:900px){ .split{grid-template-columns:1fr} }
 
-    /* reveal animation */
-    .reveal{opacity:0; transform:translateY(18px); transition: all .7s cubic-bezier(.2,.9,.3,1)}
+    .box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
+    .skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+    @media (max-width:640px){ .skill-grid{grid-template-columns:repeat(2,1fr)} }
+    .skill{background:rgba(255,255,255,0.02); padding:10px; border-radius:10px; text-align:center; font-weight:700; color:#cfe8ff}
+
+    /* footer */
+    footer{margin-top:26px; padding:18px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02)}
+
+    /* reveal & motion reduce */
+    .reveal{opacity:0; transform: translateY(20px); transition: all .7s var(--ease)}
     .reveal.show{opacity:1; transform:translateY(0)}
 
-    /* ripple on click for CTA */
-    .ripple{position:relative; overflow:hidden}
-    .ripple .circle{position:absolute; border-radius:50%; transform:translate(-50%,-50%); background: rgba(255,255,255,0.12); width:0; height:0; opacity:0; pointer-events:none; transition: width .5s ease, height .5s ease, opacity .4s}
-    .ripple:active .circle{opacity:1; width:200px; height:200px}
-
-    /* small utilities */
-    .muted{color:var(--muted)}
-    .stack{display:flex; gap:8px; flex-wrap:wrap}
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none!important}
+    }
   </style>
 </head>
 <body>
-
   <div class="wrap" role="main">
-    <!-- header -->
+    <!-- HEADER -->
     <header>
       <div class="brand">
         <div class="logo" aria-hidden="true">RP</div>
         <div>
-          <h1 style="margin:0; font-size:14px">Robin Pandey</h1>
-          <div style="font-size:12px; color:var(--muted)">Full Stack Developer</div>
+          <div class="who">Robin Pandey</div>
+          <div class="role">Full Stack Developer</div>
         </div>
       </div>
 
-      <nav aria-label="Primary">
+      <nav aria-label="Main navigation">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
-        <a class="btn btn-solid ripple" href="assets/Robin-Pandey-Resume.pdf" download aria-label="Download resume">
-          <span class="circle"></span>
-          Resume
-        </a>
+        <a class="nav-cta" href="assets/Robin-Pandey-Resume.pdf" download>Resume</a>
       </nav>
 
-      <button class="hamburger" aria-label="Open navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="hambtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
       </button>
+      <div class="mobile-nav" role="menu" aria-hidden="true">
+        <a href="#about" role="menuitem">About</a>
+        <a href="#projects" role="menuitem">Projects</a>
+        <a href="#skills" role="menuitem">Skills</a>
+        <a href="#contact" role="menuitem">Contact</a>
+        <a href="assets/Robin-Pandey-Resume.pdf" download role="menuitem">Resume</a>
+      </div>
     </header>
 
-    <!-- hero area -->
+    <!-- HERO -->
     <section class="hero">
-      <!-- LEFT -->
-      <aside class="left" aria-labelledby="profile-name">
-        <div style="display:flex; gap:14px; align-items:center">
-          <div class="avatar" aria-hidden="true">RP</div>
-          <div>
-            <div id="profile-name" class="name">Robin Pandey</div>
-            <div class="role">Full Stack Developer · React & .NET Core</div>
+      <!-- LEFT PANEL -->
+      <aside class="left" id="about">
+        <div class="profile">
+          <div class="avatar" aria-hidden="true">
+            <!-- replace with actual image: <img src="assets/avatar.jpg" alt="Robin Pandey"> -->
+            RP
+          </div>
+          <div class="whoami">
+            <div class="name">Robin Pandey</div>
+            <div class="subtitle">Full Stack Developer • React · .NET Core · MySQL</div>
           </div>
         </div>
 
-        <div class="headline">
-          I build scalable, user-friendly web applications — real-time features, clean APIs, and modern UI.
+        <div class="bio">
+          I build production-ready web applications with attention to performance, real-time features and clean backend APIs. I enjoy problem-solving and shipping high-quality software.
         </div>
 
-        <div class="cta-row">
-          <a href="#contact" class="btn btn-solid ripple" style="text-decoration:none">Hire me</a>
-          <a href="mailto:pandeyrobin19009@gmail.com" class="btn btn-ghost">Email</a>
+        <div class="badges">
+          <div class="badge">React</div>
+          <div class="badge">C# · .NET Core</div>
+          <div class="badge">MySQL</div>
+          <div class="badge">SignalR</div>
+          <div class="badge">Azure DevOps</div>
         </div>
 
-        <div style="margin-top:6px; color:var(--muted); font-size:13px">Based in Panipat, Haryana · Open to remote</div>
-
-        <div class="meta-list" aria-hidden="false">
-          <div style="margin-top:14px; font-weight:700; color:#cfe8ff">Contact</div>
+        <div class="contact">
+          <div style="font-weight:800; color:#cfe8ff; margin-top:14px">Contact</div>
           <a href="mailto:pandeyrobin19009@gmail.com">pandeyrobin19009@gmail.com</a>
-          <div class="muted">+91-7027325861</div>
+          <div style="color:var(--muted); margin-top:6px">+91-7027325861</div>
           <a href="https://www.linkedin.com/in/robin-pandey-1929a723a" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">GitHub</a>
         </div>
       </aside>
 
-      <!-- RIGHT -->
-      <main class="right" id="maincontent">
+      <!-- RIGHT PANEL -->
+      <main class="right" id="mainpanel">
         <div class="kicker">Welcome</div>
-        <div class="title">Hello — I'm Robin</div>
-        <div class="typewriter" id="typewriter">Full Stack Developer • React · .NET Core · MySQL</div>
+        <h2 class="title">Hi, I'm Robin — I build web apps that scale</h2>
+        <div class="subtitle">Real-time features, clean APIs, and memorable UI/UX</div>
+        <p class="lead">Selected work below — click live / code to explore. I prefer collaborating in agile teams and delivering measurable outcomes.</p>
 
-        <p class="intro muted">Experienced in building real-time apps (Doctora), backend systems (AcademyGo), and task management solutions. I focus on delivering production-ready code, clean architecture and a great user experience.</p>
-
-        <!-- Projects -->
+        <!-- PROJECTS -->
         <section id="projects" class="reveal">
-          <h3 style="margin-top:20px">Selected Projects</h3>
-          <div class="projects" id="projects-grid">
-            <!-- Card 1 -->
-            <article class="card" tabindex="0" aria-labelledby="p1-title">
-              <div class="shine" aria-hidden="true"></div>
-              <div class="tag">Featured</div>
-              <div id="p1-title" class="p-title">Doctora — Real-Time Consultation</div>
-              <div class="p-sub">React, Tailwind, SignalR, Azure DevOps — Live & PlayStore release</div>
-              <div class="actions">
-                <a class="small-btn primary" href="https://www.doctora.live/" target="_blank" rel="noopener">Live</a>
-                <a class="small-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
+          <h3 style="margin:0; font-size:18px; margin-top:18px">Selected Projects</h3>
+          <div class="projects" role="list" aria-label="Projects list">
+            <!-- Project 1 -->
+            <article class="project" role="listitem" aria-labelledby="proj1">
+              <div class="img">
+                <img alt="Doctora project screenshot" src="https://images.unsplash.com/photo-1581091012184-7f9b7d6f1f6d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a8b0c8e0d6f" loading="lazy">
+              </div>
+              <div class="p-title" id="proj1">Doctora — Telemedicine Platform</div>
+              <div class="p-desc">Real-time consultations using SignalR, cross-platform releases, and CI/CD through Azure DevOps.</div>
+              <div class="p-tags" aria-hidden="true">
+                <span class="ptag">React</span><span class="ptag">SignalR</span><span class="ptag">Azure</span>
+              </div>
+              <div class="p-actions">
+                <a class="link-btn primary" href="https://www.doctora.live/" target="_blank" rel="noopener">Live</a>
+                <a class="link-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
               </div>
             </article>
 
-            <!-- Card 2 -->
-            <article class="card reveal" tabindex="0" aria-labelledby="p2-title">
-              <div class="shine" aria-hidden="true"></div>
-              <div class="p-title" id="p2-title">AcademyGo — Backend for Education</div>
-              <div class="p-sub">.NET Core, C#, MySQL — Secure CRUD APIs, clean architecture</div>
-              <div class="actions">
-                <a class="small-btn primary" href="#" target="_blank" rel="noopener">Case study</a>
-                <a class="small-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
+            <!-- Project 2 -->
+            <article class="project reveal" role="listitem" aria-labelledby="proj2">
+              <div class="img">
+                <img alt="AcademyGo project screenshot" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b5b6e3e9f" loading="lazy">
+              </div>
+              <div class="p-title" id="proj2">AcademyGo — Education Backend</div>
+              <div class="p-desc">Designed secure REST APIs and database schema in .NET Core & MySQL. Focus on scalability and RBAC.</div>
+              <div class="p-tags"><span class="ptag">.NET</span><span class="ptag">MySQL</span></div>
+              <div class="p-actions">
+                <a class="link-btn primary" href="#" target="_blank" rel="noopener">Case study</a>
+                <a class="link-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
               </div>
             </article>
 
-            <!-- Card 3 -->
-            <article class="card reveal" tabindex="0" aria-labelledby="p3-title">
-              <div class="shine" aria-hidden="true"></div>
-              <div class="p-title" id="p3-title">Task Management System</div>
-              <div class="p-sub">React + Tailwind frontend, .NET Core backend</div>
-              <div class="actions">
-                <a class="small-btn primary" href="#" target="_blank" rel="noopener">Demo</a>
-                <a class="small-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
+            <!-- Project 3 -->
+            <article class="project reveal" role="listitem" aria-labelledby="proj3">
+              <div class="img">
+                <img alt="Task manager project screenshot" src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ab0f8b5b2f" loading="lazy">
+              </div>
+              <div class="p-title" id="proj3">Task Management System</div>
+              <div class="p-desc">Full-stack task manager with role-based actions, notifications and clean UI built in React.</div>
+              <div class="p-tags"><span class="ptag">React</span><span class="ptag">Tailwind</span></div>
+              <div class="p-actions">
+                <a class="link-btn primary" href="#" target="_blank" rel="noopener">Demo</a>
+                <a class="link-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
               </div>
             </article>
           </div>
         </section>
 
-        <!-- Skills -->
-        <section id="skills" class="reveal" style="margin-top:22px">
-          <h3>Technical Skills</h3>
-          <div class="stack" style="margin-top:10px">
-            <span class="tag">React</span>
-            <span class="tag">JavaScript (ES6+)</span>
-            <span class="tag">Tailwind</span>
-            <span class="tag">.NET Core</span>
-            <span class="tag">C#</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">SignalR</span>
-            <span class="tag">Azure DevOps</span>
-          </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="reveal" style="margin-top:22px">
-          <h3>Contact</h3>
-          <div class="contact">
-            <div class="card">
-              <div style="font-weight:700">Get in touch</div>
-              <div class="muted" style="margin-top:8px">Email me for collaborations, freelance work or opportunities.</div>
-              <div style="margin-top:12px">
-                <a class="small-btn primary" href="mailto:pandeyrobin19009@gmail.com">Email</a>
-                <a class="small-btn" href="assets/Robin-Pandey-Resume.pdf" download>Download Resume</a>
-              </div>
-            </div>
-
-            <div class="card">
-              <div style="font-weight:700">Social</div>
-              <div class="muted" style="margin-top:8px">
-                <div><strong>LinkedIn:</strong> <a style="color:#cfe8ff" href="https://www.linkedin.com/in/robin-pandey-1929a723a" target="_blank">linkedin.com/in/robin-pandey-1929a723a</a></div>
-                <div style="margin-top:8px"><strong>GitHub:</strong> <a style="color:#cfe8ff" href="https://github.com/R0bin-Pandey" target="_blank">github.com/R0bin-Pandey</a></div>
-              </div>
+        <!-- SKILLS & CONTACT -->
+        <section class="split reveal" style="margin-top:18px">
+          <div class="box">
+            <h4 style="margin:0">Skills</h4>
+            <div class="skill-grid" style="margin-top:12px">
+              <div class="skill">React</div>
+              <div class="skill">JavaScript</div>
+              <div class="skill">HTML/CSS</div>
+              <div class="skill">.NET Core</div>
+              <div class="skill">C#</div>
+              <div class="skill">MySQL</div>
+              <div class="skill">SignalR</div>
+              <div class="skill">Azure DevOps</div>
+              <div class="skill">Git</div>
             </div>
           </div>
+
+          <div class="box" id="contact">
+            <h4 style="margin:0">Contact</h4>
+            <p style="color:var(--muted); margin-top:10px">Available for full-time & remote roles. Open to freelance & collaborations.</p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+              <a class="link-btn primary" href="mailto:pandeyrobin19009@gmail.com">Email</a>
+              <a class="link-btn" href="assets/Robin-Pandey-Resume.pdf" download>Download Resume</a>
+              <a class="link-btn" href="https://www.linkedin.com/in/robin-pandey-1929a723a" target="_blank">LinkedIn</a>
+            </div>
+            <div style="color:var(--muted); margin-top:12px; font-weight:700">Phone: +91-7027325861</div>
+          </div>
         </section>
 
-        <footer aria-hidden="false">© Robin Pandey · Full Stack Developer</footer>
+        <footer class="reveal">© Robin Pandey — Full Stack Developer</footer>
       </main>
     </section>
   </div>
 
   <script>
-    // Typewriter effect
+    /* ============================
+       MOBILE NAV TOGGLE
+       ============================ */
     (function(){
-      const el = document.getElementById('typewriter');
-      const phrases = ["Full Stack Developer • React · .NET Core · MySQL", "Real-time apps, clean APIs, performant UI", "Doctora — SignalR · AcademyGo · Task Management"];
-      let i=0, j=0, dir=1, pause=false;
-      function step(){
-        if(pause){ setTimeout(step,80); return; }
-        el.textContent = phrases[i].slice(0, j);
-        j += dir;
-        if(j > phrases[i].length){ dir = -1; pause = true; setTimeout(()=>{ pause=false; },1200); }
-        if(j < 0){ dir = 1; i = (i+1) % phrases.length; j = 0; }
-        setTimeout(step, 60 + Math.random()*40);
-      }
-      step();
-    })();
-
-    // Header hamburger toggle (mobile)
-    (function(){
-      const ham = document.querySelector('.hamburger');
-      const nav = document.querySelector('header nav');
-      ham.addEventListener('click', () => {
-        const open = ham.classList.toggle('open');
-        ham.setAttribute('aria-expanded', String(open));
-        if(open){
-          nav.style.display = 'flex'; nav.style.flexDirection = 'column'; nav.style.position = 'absolute'; nav.style.right = '20px'; nav.style.top = '72px'; nav.style.background = 'rgba(3,7,18,0.9)'; nav.style.padding = '12px'; nav.style.borderRadius = '10px';
-        } else {
-          nav.style.display = '';
-          nav.style.position = '';
-          nav.style.right = '';
-          nav.style.top = '';
-          nav.style.background = '';
-          nav.style.padding = '';
-          nav.style.borderRadius = '';
+      const btn = document.querySelector('.hambtn');
+      const mob = document.querySelector('.mobile-nav');
+      btn.addEventListener('click', ()=>{
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        mob.style.display = open ? 'none' : 'block';
+        mob.setAttribute('aria-hidden', String(open));
+      });
+      // hide mobile nav when clicking outside
+      document.addEventListener('click', (e)=>{
+        if(!mob.contains(e.target) && !btn.contains(e.target) && mob.style.display === 'block'){
+          mob.style.display = 'none'; btn.setAttribute('aria-expanded','false');
         }
       });
     })();
 
-    // Reveal on scroll using IntersectionObserver
+    /* ============================
+       REVEAL ON SCROLL
+       ============================ */
     (function(){
       const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting) e.target.classList.add('show');
+        entries.forEach(en=>{
+          if(en.isIntersecting) en.target.classList.add('show');
         });
-      }, { threshold: 0.15 });
-      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+      }, {threshold:0.12});
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     })();
 
-    // Card tilt effect (simple)
+    /* ============================
+       CARD HOVER TILT (lightweight)
+       ============================ */
     (function(){
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card=>{
-        card.addEventListener('mousemove', (ev)=>{
+      const projects = document.querySelectorAll('.project');
+      projects.forEach(card=>{
+        card.addEventListener('mousemove', e=>{
           const rect = card.getBoundingClientRect();
-          const x = ev.clientX - rect.left;
-          const y = ev.clientY - rect.top;
-          const cx = rect.width/2;
-          const cy = rect.height/2;
-          const dx = (x - cx) / cx;
-          const dy = (y - cy) / cy;
-          card.style.transform = `perspective(800px) rotateX(${ -dy * 6 }deg) rotateY(${ dx * 6 }deg) translateZ(0)`;
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(800px) rotateX(${ -y * 6 }deg) rotateY(${ x * 6 }deg) translateZ(0)`;
         });
-        card.addEventListener('mouseleave', ()=>{
-          card.style.transform = '';
-        });
+        card.addEventListener('mouseleave', ()=> card.style.transform = '');
       });
     })();
 
-    // Ripple button circle creation handled by CSS sized circle element inside .ripple
-
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', function(e){
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({ behavior:'smooth', block:'start' });
-          // close nav on mobile if open
-          const ham = document.querySelector('.hamburger');
-          if(ham.classList.contains('open')) ham.click();
-        }
-      });
-    });
-
-    // Accessibility: focus-visible polyfill simple
+    /* ============================
+       SMOOTH SCROLL + CLOSE MOBILE
+       ============================ */
     (function(){
-      document.body.addEventListener('keyup', (e)=>{
-        if(e.key === 'Tab') document.body.classList.add('user-is-tabbing');
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const t = document.querySelector(this.getAttribute('href'));
+          if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+          // close mobile
+          const mob = document.querySelector('.mobile-nav');
+          if(mob.style.display === 'block') mob.style.display = 'none';
+        });
       });
     })();
   </script>
