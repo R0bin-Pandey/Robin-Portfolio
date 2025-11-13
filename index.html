@@ -4,407 +4,416 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Robin Pandey — Full Stack Developer</title>
-  <meta name="description" content="Robin Pandey — Full Stack Developer (React, .NET Core, MySQL). Portfolio with projects, resume and contact." />
+  <meta name="description" content="Robin Pandey — Full Stack Developer (React, .NET Core, MySQL). Open to Work. Portfolio with projects, resume and contact." />
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
+  <meta name="color-scheme" content="dark">
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ============================
-       VARIABLES & BASE
-       ============================ */
     :root{
-      --bg-1: #061021;
-      --bg-2: #08132a;
-      --card:#071627;
-      --muted:#9fb0c8;
-      --accent:#7c3aed;         /* purple */
-      --accent-2:#06b6d4;      /* teal */
-      --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
-      --radius:14px;
-      --maxw:1200px;
-      --ease: cubic-bezier(.2,.9,.3,1);
+      --bg-1:#061021; --bg-2:#071429; --card:#081427; --muted:#9fb0c8;
+      --accent:#7c3aed; --accent2:#06b6d4; --glass:rgba(255,255,255,0.03);
+      --maxw:1200px; --radius:14px; --ease:cubic-bezier(.2,.9,.3,1);
       font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background: linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
-      color:#e6f3ff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      display:flex; align-items:flex-start; justify-content:center; padding:28px;
-      line-height:1.45;
+    html,body{height:100%; margin:0; background:linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#e6f3ff}
+    body{display:flex; align-items:center; justify-content:center; padding:28px}
+
+    /* Main wrapper */
+    .wrap{width:100%; max-width:var(--maxw); border-radius:16px; overflow:hidden;
+          background:
+            radial-gradient(600px 200px at 10% 10%, rgba(124,58,237,0.05), transparent 8%),
+            radial-gradient(400px 150px at 90% 85%, rgba(6,182,212,0.03), transparent 6%),
+            linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+          border:1px solid rgba(255,255,255,0.03); box-shadow: 0 30px 80px rgba(2,6,23,0.65);
     }
 
-    .wrap{
-      width:100%; max-width:var(--maxw); border-radius:18px; overflow:hidden;
-      box-shadow: 0 30px 80px rgba(5,9,18,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.03);
-      background:
-        radial-gradient(600px 200px at 10% 10%, rgba(124,58,237,0.06), transparent 8%),
-        radial-gradient(400px 150px at 90% 85%, rgba(6,182,212,0.03), transparent 6%),
-        linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    /* Constant sticky mini header with name */
+    .mini-sticky{
+      position:sticky; top:10px; z-index:60; display:flex; justify-content:flex-end;
+      padding:10px 18px; backdrop-filter: blur(6px);
+    }
+    .mini-name{
+      background: linear-gradient(90deg,var(--accent),var(--accent2));
+      color:white; padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 8px 30px rgba(124,58,237,0.15)
     }
 
-    /* ============================
-       HEADER / NAV
-       ============================ */
     header{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:16px 22px; gap:12px;
-      position:sticky; top:22px; z-index:50; backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(6,10,17,0.55), rgba(6,10,17,0.35));
-      border-bottom:1px solid rgba(255,255,255,0.02);
-    }
-    .brand{display:flex; align-items:center; gap:12px}
-    .logo{
-      width:46px; height:46px; border-radius:12px;
-      background: linear-gradient(135deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center;
-      font-weight:800; font-size:18px; color:white; box-shadow: 0 10px 30px rgba(124,58,237,0.16);
-    }
-    .brand .who{font-size:14px; font-weight:700}
-    .brand .role{font-size:12px; color:var(--muted)}
-
-    nav{display:flex; gap:10px; align-items:center}
-    nav a{
-      color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:650; font-size:14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 22px; border-bottom:1px solid rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
       position:relative;
+      background:linear-gradient(180deg, rgba(6,10,17,0.55), rgba(6,10,17,0.35));
     }
-    nav a:hover{color:#fff}
-    nav a::after{
-      content:""; position:absolute; left:12px; right:12px; height:3px; bottom:4px; background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      border-radius:4px; transform:scaleX(0); transform-origin:left; transition: transform .28s var(--ease);
-      opacity:0.95;
-    }
-    nav a:hover::after{ transform:scaleX(1) }
 
-    .nav-cta{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:10px; font-weight:700; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; text-decoration:none}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:800; color:white; background:linear-gradient(135deg,var(--accent), #4f46e5)}
+    .brand h1{font-size:16px; margin:0}
+    .brand p{margin:0; color:var(--muted); font-size:13px}
+
+    /* Desktop nav */
+    nav{display:flex; gap:10px; align-items:center}
+    nav a{color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:10px; font-weight:700; position:relative}
+    nav a:hover{color:white}
+    nav a::after{content:""; position:absolute; left:12px; right:12px; height:3px; bottom:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); border-radius:6px; transform-origin:left; transform:scaleX(0); transition:transform .28s var(--ease)}
+    nav a:hover::after{transform:scaleX(1)}
+
+    .cta-resume{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white; padding:9px 14px; border-radius:10px; font-weight:800; text-decoration:none}
 
     /* mobile hamburger */
-    .hambtn{display:none; width:44px; height:44px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; align-items:center; justify-content:center; cursor:pointer}
-    .hambtn span{display:block; width:18px; height:2px; background:var(--muted); border-radius:2px}
-    .hambtn span+span{margin-top:5px}
-    .mobile-nav{
-      display:none; position:fixed; right:18px; top:86px; background:linear-gradient(180deg, rgba(3,7,18,0.95), rgba(3,7,18,0.9));
-      padding:12px; border-radius:12px; box-shadow:0 20px 60px rgba(2,6,23,0.6);
-    }
-    .mobile-nav a{display:block; padding:8px 10px; color:var(--muted); text-decoration:none; border-radius:8px}
-    .mobile-nav a:hover{color:white; background:rgba(255,255,255,0.02)}
+    .hamb{display:none; width:44px; height:44px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03); align-items:center; justify-content:center}
+    .hamb span{display:block; width:18px; height:2px; background:var(--muted); border-radius:2px}
+    .hamb span+span{margin-top:5px}
+    .mobile-menu{display:none; position:absolute; right:18px; top:64px; padding:12px; background:linear-gradient(180deg, rgba(3,7,18,0.96), rgba(3,7,18,0.9)); border-radius:12px; box-shadow:0 20px 40px rgba(2,6,23,0.6)}
+    .mobile-menu a{display:block; padding:10px; color:var(--muted); text-decoration:none; border-radius:8px}
+    .mobile-menu a:hover{color:white; background:rgba(255,255,255,0.02)}
 
-    /* ============================
-       HERO / LAYOUT
-       ============================ */
-    .hero{
-      display:grid; grid-template-columns: 420px 1fr; gap:0;
-    }
-    @media (max-width:1000px){ .hero{grid-template-columns: 1fr} header nav{display:none} .hambtn{display:flex} }
+    @media (max-width:1000px){ nav{display:none} .hamb{display:flex} }
 
-    /* left panel */
-    .left{
-      padding:34px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      min-height:540px; display:flex; flex-direction:column; gap:14px;
-    }
-    .profile{
-      display:flex; gap:14px; align-items:center;
-    }
+    /* layout: hero two-column responsive */
+    .hero{display:grid; grid-template-columns:430px 1fr}
+    @media (max-width:980px){ .hero{grid-template-columns:1fr} header{padding:12px} }
+
+    /* left column (hero/profile) */
+    .left{padding:36px; min-height:520px; display:flex; flex-direction:column; gap:16px}
     .avatar{
-      width:112px; height:112px; border-radius:16px; background:linear-gradient(180deg,var(--accent), #4f46e5);
-      display:flex; align-items:center; justify-content:center; font-weight:800; font-size:36px; color:white;
-      box-shadow: 0 16px 40px rgba(79,70,229,0.14);
-      flex-shrink:0;
-      overflow:hidden;
+      width:140px; height:140px; border-radius:18px; background:linear-gradient(180deg,var(--accent), #4f46e5); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:32px; color:white; box-shadow:0 18px 50px rgba(79,70,229,0.16); overflow:hidden;
+      transition: transform .6s var(--ease);
     }
     .avatar img{width:100%; height:100%; object-fit:cover; display:block}
-    .whoami{display:flex; flex-direction:column}
-    .whoami .name{font-size:20px; font-weight:800}
-    .whoami .subtitle{color:var(--muted); font-weight:600; margin-top:4px}
 
-    .bio{margin-top:12px; color:#dbeafe; font-weight:600; font-size:15px; line-height:1.4}
-    .badges{margin-top:14px; display:flex; gap:8px; flex-wrap:wrap}
-    .badge{padding:8px 10px; border-radius:999px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:#cfe8ff; font-weight:700; font-size:13px; border:1px solid rgba(255,255,255,0.02)}
+    .open-badge{display:inline-block; padding:8px 12px; background: linear-gradient(90deg,#10b981,#06b6d4); color:white; border-radius:999px; font-weight:800; font-size:13px}
 
-    .left .contact{margin-top:auto; color:var(--muted); font-size:14px}
-    .left .contact a{color:inherit; display:block; text-decoration:none; margin-top:8px}
+    .name{font-size:28px; font-weight:900; margin-top:10px}
+    .roles{color:var(--muted); font-weight:700; margin-top:6px}
+    .hero-desc{margin-top:12px; color:#dbeafe; font-weight:600; line-height:1.5}
 
-    /* right panel */
-    .right{padding:28px 34px}
-    .kicker{color:var(--accent-2); font-weight:800; letter-spacing:1px; font-size:12px}
-    .title{font-size:36px; color:white; margin-top:8px; font-weight:900}
-    .subtitle{color:#cfe8ff; margin-top:10px; font-weight:700}
-    .lead{color:var(--muted); margin-top:16px; font-size:15px; max-width:70ch}
+    .left-actions{margin-top:14px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn{padding:10px 14px; border-radius:10px; font-weight:800; text-decoration:none; display:inline-flex; gap:10px; align-items:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:white}
+    .btn-ghost{border:1px solid rgba(255,255,255,0.04); color:var(--muted); background:transparent}
+
+    .left-foot{margin-top:auto; color:var(--muted); font-size:14px}
+    .left-foot a{color:inherit; text-decoration:none; display:block; margin-top:8px}
+
+    /* right column: content sections (will show/hide) */
+    .right{padding:28px 36px}
+    .kicker{color:var(--accent2); font-weight:800; letter-spacing:0.9px}
+    .title{font-size:30px; color:white; margin-top:8px; font-weight:900}
+    .subtitle{color:#cfe8ff; margin-top:8px; font-weight:700}
+    .lead{color:var(--muted); margin-top:14px; font-size:15px; max-width:70ch}
+
+    /* sections base */
+    .section{margin-top:20px; display:none}
+    .section.active{display:block}
+    .section h2{margin:0; font-size:20px; color:white}
 
     /* projects grid */
-    .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px}
-    @media (max-width:1100px){ .projects{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:640px){ .projects{grid-template-columns:1fr} }
+    .projects-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:14px}
+    @media (max-width:1100px){ .projects-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:680px){ .projects-grid{grid-template-columns:1fr} }
 
-    .project{
-      position:relative; border-radius:12px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03); padding:14px; transition: transform .36s var(--ease), box-shadow .36s var(--ease);
-      display:flex; flex-direction:column; min-height:160px;
-    }
-    .project:hover{ transform: translateY(-10px) scale(1.01); box-shadow: 0 30px 60px rgba(2,6,23,0.6) }
+    .repo-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); transition: transform .28s var(--ease), box-shadow .28s var(--ease); position:relative; overflow:hidden}
+    .repo-card:hover{transform:translateY(-8px); box-shadow:0 20px 40px rgba(2,6,23,0.55)}
+    .repo-title{font-weight:800}
+    .repo-desc{color:var(--muted); margin-top:8px; min-height:44px}
+    .repo-meta{margin-top:10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .repo-lang{background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px; font-weight:800; color:#cfe8ff; font-size:13px}
+    .repo-links{margin-left:auto; display:flex; gap:8px}
+    .repo-links a{color:var(--muted); text-decoration:none; font-weight:800; padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03)}
 
-    .project .img{
-      height:120px; border-radius:10px; overflow:hidden; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display:flex; align-items:center; justify-content:center; margin-bottom:12px; border:1px solid rgba(255,255,255,0.02)
-    }
-    .project img{width:100%; height:100%; object-fit:cover; display:block}
+    .repo-overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.28)); opacity:0; transition:opacity .22s var(--ease); display:flex; align-items:center; justify-content:center; padding:12px; text-align:center}
+    .repo-card:hover .repo-overlay{opacity:1}
 
-    .p-title{font-weight:800; font-size:15px; color:#e6f7ff}
-    .p-desc{color:var(--muted); margin-top:8px; font-size:13px; flex:1}
-    .p-tags{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap}
-    .ptag{font-size:12px; padding:6px 8px; border-radius:999px; background:rgba(255,255,255,0.02); color:#cfe8ff; font-weight:700}
+    /* about details (training & qualification) */
+    .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px}
+    @media (max-width:900px){ .about-grid{grid-template-columns:1fr} }
+    .box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); color:var(--muted)}
+    .box strong{color:#e6f3ff}
 
-    .p-actions{display:flex; gap:8px; margin-top:12px}
-    .link-btn{padding:9px 12px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); text-decoration:none; font-weight:800}
-    .link-btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; border:0}
-
-    /* skills + contact */
-    .split{display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:22px}
-    @media (max-width:900px){ .split{grid-template-columns:1fr} }
-
-    .box{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.03)}
-    .skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
-    @media (max-width:640px){ .skill-grid{grid-template-columns:repeat(2,1fr)} }
-    .skill{background:rgba(255,255,255,0.02); padding:10px; border-radius:10px; text-align:center; font-weight:700; color:#cfe8ff}
+    /* contact icons row */
+    .contact-row{display:flex; gap:12px; margin-top:12px; align-items:center}
+    .icon{width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.02); color:#cfe8ff; font-weight:800; text-decoration:none}
 
     /* footer */
     footer{margin-top:26px; padding:18px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,0.02)}
 
-    /* reveal & motion reduce */
-    .reveal{opacity:0; transform: translateY(20px); transition: all .7s var(--ease)}
-    .reveal.show{opacity:1; transform:translateY(0)}
+    /* focus for accessibility */
+    :focus{outline:2px solid rgba(124,58,237,0.25); outline-offset:3px}
 
-    @media (prefers-reduced-motion: reduce){
-      *{transition:none!important}
-    }
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
   </style>
 </head>
 <body>
-  <div class="wrap" role="main">
-    <!-- HEADER -->
+  <div class="wrap" role="main" aria-live="polite">
+    <!-- sticky mini header with name -->
+    <div class="mini-sticky"><div class="mini-name">Robin Pandey</div></div>
+
+    <!-- main header/nav -->
     <header>
       <div class="brand">
         <div class="logo" aria-hidden="true">RP</div>
         <div>
-          <div class="who">Robin Pandey</div>
-          <div class="role">Full Stack Developer</div>
+          <h1 style="margin:0; font-size:16px">Robin Pandey</h1>
+          <p style="margin:0; font-size:12px; color:var(--muted)">Full Stack Developer — Open to work</p>
         </div>
       </div>
 
-      <nav aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-        <a class="nav-cta" href="assets/Robin-Pandey-Resume.pdf" download>Resume</a>
+      <nav aria-label="Primary navigation">
+        <a href="#" data-show="home" class="nav-link">Home</a>
+        <a href="#" data-show="about" class="nav-link">About</a>
+        <a href="#" data-show="projects" class="nav-link">Projects</a>
+        <a href="#" data-show="contact" class="nav-link">Contact</a>
+        <a class="cta-resume" href="assets/Robin-Pandey-Resume.pdf" download>Download Resume</a>
       </nav>
 
-      <button class="hambtn" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-      <div class="mobile-nav" role="menu" aria-hidden="true">
-        <a href="#about" role="menuitem">About</a>
-        <a href="#projects" role="menuitem">Projects</a>
-        <a href="#skills" role="menuitem">Skills</a>
-        <a href="#contact" role="menuitem">Contact</a>
-        <a href="assets/Robin-Pandey-Resume.pdf" download role="menuitem">Resume</a>
+      <button class="hamb" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+      <div class="mobile-menu" aria-hidden="true">
+        <a href="#" data-show="home">Home</a>
+        <a href="#" data-show="about">About</a>
+        <a href="#" data-show="projects">Projects</a>
+        <a href="#" data-show="contact">Contact</a>
+        <a href="assets/Robin-Pandey-Resume.pdf" download>Resume</a>
       </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <!-- LEFT PANEL -->
-      <aside class="left" id="about">
-        <div class="profile">
-          <div class="avatar" aria-hidden="true">
-            <!-- replace with actual image: <img src="assets/avatar.jpg" alt="Robin Pandey"> -->
-            RP
+    <!-- hero area: left + right -->
+    <div class="hero">
+      <!-- LEFT: profile + CTA -->
+      <aside class="left" aria-labelledby="hero-name">
+        <div style="display:flex; gap:16px; align-items:center">
+          <div class="avatar" id="avatar" aria-hidden="false">
+            <!-- if you add assets/avatar.jpg it will show -->
+            <img id="avatar-img" src="" alt="" style="display:none">
+            <span id="avatar-initials">RP</span>
           </div>
-          <div class="whoami">
-            <div class="name">Robin Pandey</div>
-            <div class="subtitle">Full Stack Developer • React · .NET Core · MySQL</div>
+          <div>
+            <div id="hero-name" class="name">Robin Pandey</div>
+            <div class="roles">Full Stack Developer • React · .NET Core · MySQL</div>
+            <div style="margin-top:8px"><span class="open-badge">Open to Work</span></div>
           </div>
         </div>
 
-        <div class="bio">
-          I build production-ready web applications with attention to performance, real-time features and clean backend APIs. I enjoy problem-solving and shipping high-quality software.
+        <div class="hero-desc">
+          Creative problem-solver and fast learner with hands-on experience building real-time applications (Doctora), production backends (AcademyGo) and responsive frontends. I ship well-tested, maintainable code and collaborate effectively in agile teams.
         </div>
 
-        <div class="badges">
-          <div class="badge">React</div>
-          <div class="badge">C# · .NET Core</div>
-          <div class="badge">MySQL</div>
-          <div class="badge">SignalR</div>
-          <div class="badge">Azure DevOps</div>
+        <div class="left-actions">
+          <a href="#" class="btn btn-primary nav-link" data-show="projects">See Projects</a>
+          <a href="mailto:pandeyrobin19009@gmail.com" class="btn btn-ghost">Email Me</a>
         </div>
 
-        <div class="contact">
-          <div style="font-weight:800; color:#cfe8ff; margin-top:14px">Contact</div>
-          <a href="mailto:pandeyrobin19009@gmail.com">pandeyrobin19009@gmail.com</a>
-          <div style="color:var(--muted); margin-top:6px">+91-7027325861</div>
-          <a href="https://www.linkedin.com/in/robin-pandey-1929a723a" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">GitHub</a>
+        <div class="left-foot">
+          <div><strong>Location:</strong> Panipat, Haryana</div>
+          <div style="margin-top:8px"><strong>Phone:</strong> +91-7027325861</div>
+          <div style="margin-top:8px"><a href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">github.com/R0bin-Pandey</a></div>
         </div>
       </aside>
 
-      <!-- RIGHT PANEL -->
-      <main class="right" id="mainpanel">
-        <div class="kicker">Welcome</div>
-        <h2 class="title">Hi, I'm Robin — I build web apps that scale</h2>
-        <div class="subtitle">Real-time features, clean APIs, and memorable UI/UX</div>
-        <p class="lead">Selected work below — click live / code to explore. I prefer collaborating in agile teams and delivering measurable outcomes.</p>
+      <!-- RIGHT: content sections -->
+      <main class="right" id="content" aria-live="polite">
+        <!-- HOME (visible by default) -->
+        <section id="home" class="section active" aria-labelledby="home-title">
+          <div class="kicker">Welcome</div>
+          <h2 id="home-title" class="title">Hi — I'm Robin. I build web apps that scale.</h2>
+          <div class="subtitle">Real-time features, clean APIs, and thoughtful UI/UX</div>
+          <p class="lead">Explore my projects and experience. Click Projects to fetch my GitHub repos live, or download my resume. I focus on production-ready solutions with clean architecture and a strong emphasis on user experience.</p>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="section" aria-labelledby="about-title">
+          <h2 id="about-title">About me</h2>
+          <p style="margin-top:10px; color:var(--muted)">I am a creative, detail-oriented Full Stack Developer and a good learner with strong problem-solving skills. I enjoy building both front-end experiences and robust back-end systems, and I am comfortable working across the full stack.</p>
+
+          <div class="about-grid" style="margin-top:14px">
+            <div class="box">
+              <strong>Summary</strong>
+              <p style="margin-top:8px; color:var(--muted)">
+                Full Stack Developer & Project Engineer skilled in React.js, .NET Core (C#) and MySQL. Experienced in developing scalable, user-friendly web apps with clean architecture and CI/CD pipelines.
+              </p>
+            </div>
+
+            <div class="box">
+              <strong>Training & Qualifications</strong>
+              <ul style="margin-top:8px; color:var(--muted); padding-left:18px">
+                <li>Kurukshetra University — Bachelor of Computer Applications (B.C.A)</li>
+                <li>Microsoft Course — BICA Academy</li>
+                <li>Frontend Development — Coders Academy</li>
+                <li>Backend Development — Coders Academy</li>
+                <li>ChatGPT Certificate Course — Great Learning</li>
+              </ul>
+              <div style="margin-top:8px; font-size:12px; color:var(--muted)">(Training & certifications taken from resume) :contentReference[oaicite:1]{index=1}</div>
+            </div>
+          </div>
+        </section>
 
         <!-- PROJECTS -->
-        <section id="projects" class="reveal">
-          <h3 style="margin:0; font-size:18px; margin-top:18px">Selected Projects</h3>
-          <div class="projects" role="list" aria-label="Projects list">
-            <!-- Project 1 -->
-            <article class="project" role="listitem" aria-labelledby="proj1">
-              <div class="img">
-                <img alt="Doctora project screenshot" src="https://images.unsplash.com/photo-1581091012184-7f9b7d6f1f6d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a8b0c8e0d6f" loading="lazy">
-              </div>
-              <div class="p-title" id="proj1">Doctora — Telemedicine Platform</div>
-              <div class="p-desc">Real-time consultations using SignalR, cross-platform releases, and CI/CD through Azure DevOps.</div>
-              <div class="p-tags" aria-hidden="true">
-                <span class="ptag">React</span><span class="ptag">SignalR</span><span class="ptag">Azure</span>
-              </div>
-              <div class="p-actions">
-                <a class="link-btn primary" href="https://www.doctora.live/" target="_blank" rel="noopener">Live</a>
-                <a class="link-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
-              </div>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="project reveal" role="listitem" aria-labelledby="proj2">
-              <div class="img">
-                <img alt="AcademyGo project screenshot" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b5b6e3e9f" loading="lazy">
-              </div>
-              <div class="p-title" id="proj2">AcademyGo — Education Backend</div>
-              <div class="p-desc">Designed secure REST APIs and database schema in .NET Core & MySQL. Focus on scalability and RBAC.</div>
-              <div class="p-tags"><span class="ptag">.NET</span><span class="ptag">MySQL</span></div>
-              <div class="p-actions">
-                <a class="link-btn primary" href="#" target="_blank" rel="noopener">Case study</a>
-                <a class="link-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
-              </div>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="project reveal" role="listitem" aria-labelledby="proj3">
-              <div class="img">
-                <img alt="Task manager project screenshot" src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ab0f8b5b2f" loading="lazy">
-              </div>
-              <div class="p-title" id="proj3">Task Management System</div>
-              <div class="p-desc">Full-stack task manager with role-based actions, notifications and clean UI built in React.</div>
-              <div class="p-tags"><span class="ptag">React</span><span class="ptag">Tailwind</span></div>
-              <div class="p-actions">
-                <a class="link-btn primary" href="#" target="_blank" rel="noopener">Demo</a>
-                <a class="link-btn" href="https://github.com/R0bin-Pandey" target="_blank" rel="noopener">Code</a>
-              </div>
-            </article>
+        <section id="projects" class="section" aria-labelledby="projects-title">
+          <h2 id="projects-title">Projects (fetched from GitHub)</h2>
+          <p style="color:var(--muted); margin-top:8px">Repositories are fetched live from <strong>github.com/R0bin-Pandey</strong>. Hover on a repo to read its description and click to open.</p>
+          <div id="projects-area" class="projects-grid" style="margin-top:12px">
+            <!-- repo cards injected here -->
+            <div style="grid-column:1/-1; color:var(--muted)" id="repo-loading">Loading repositories…</div>
           </div>
         </section>
 
-        <!-- SKILLS & CONTACT -->
-        <section class="split reveal" style="margin-top:18px">
-          <div class="box">
-            <h4 style="margin:0">Skills</h4>
-            <div class="skill-grid" style="margin-top:12px">
-              <div class="skill">React</div>
-              <div class="skill">JavaScript</div>
-              <div class="skill">HTML/CSS</div>
-              <div class="skill">.NET Core</div>
-              <div class="skill">C#</div>
-              <div class="skill">MySQL</div>
-              <div class="skill">SignalR</div>
-              <div class="skill">Azure DevOps</div>
-              <div class="skill">Git</div>
-            </div>
-          </div>
+        <!-- CONTACT -->
+        <section id="contact" class="section" aria-labelledby="contact-title">
+          <h2 id="contact-title">Contact</h2>
+          <p style="color:var(--muted); margin-top:8px">Available for full-time and remote roles. Open to freelance and collaborations.</p>
 
-          <div class="box" id="contact">
-            <h4 style="margin:0">Contact</h4>
-            <p style="color:var(--muted); margin-top:10px">Available for full-time & remote roles. Open to freelance & collaborations.</p>
-            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
-              <a class="link-btn primary" href="mailto:pandeyrobin19009@gmail.com">Email</a>
-              <a class="link-btn" href="assets/Robin-Pandey-Resume.pdf" download>Download Resume</a>
-              <a class="link-btn" href="https://www.linkedin.com/in/robin-pandey-1929a723a" target="_blank">LinkedIn</a>
-            </div>
-            <div style="color:var(--muted); margin-top:12px; font-weight:700">Phone: +91-7027325861</div>
+          <div style="margin-top:12px" class="contact-row">
+            <a class="icon" href="mailto:pandeyrobin19009@gmail.com" title="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6.5v11A2.5 2.5 0 0 0 5.5 20h13A2.5 2.5 0 0 0 21 17.5v-11A2.5 2.5 0 0 0 18.5 4h-13A2.5 2.5 0 0 0 3 6.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 7.25l-9 6-9-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+            <a class="icon" href="https://www.linkedin.com/in/robin-pandey-1929a723a" target="_blank" title="LinkedIn" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-12h4v2a4 4 0 0 1 4-2zM2 9h4v12H2zM4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+            <a class="icon" href="https://github.com/R0bin-Pandey" target="_blank" title="GitHub" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 .5C5.4.5.5 5.4.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.8 1.8 0 2.4 0 0 1.7.2 3.9-.9 0 0 .6-.3 1.9 0 0 0 1.7 0 3.9.9 0-.6-.1-1.9-.3-2.3-1.7 0-3.4.6-3.9.6-.3 0-.2-.6.1-1.1 0 0 1.4-.5 3.3-1.1 0 0 1.5-.6 2.8-2.3 0 0 1.1-1.8 0-4.3 0 0-.9-.4-3 .9 0 0-1.4-.4-2.9-.4s-2.9.4-2.9.4c-2.1-1.3-3-.9-3-.9-1 2.6 0 4.3 0 4.3 1.3 1.7 2.8 2.3 2.8 2.3 1.9.6 3.3 1.1 3.3 1.1.3.5.4 1.1.1 1.1-.5 0-2.2-.6-3.9-.6-.2.4-.4 1.7-.3 2.3C3.4 21.3 2 17.9 2 13.5 2 6.8 6.9 2 12 2.5"></path></svg></a>
           </div>
         </section>
 
-        <footer class="reveal">© Robin Pandey — Full Stack Developer</footer>
+        <footer>© Robin Pandey — Full Stack Developer</footer>
       </main>
-    </section>
+    </div>
   </div>
 
   <script>
-    /* ============================
-       MOBILE NAV TOGGLE
-       ============================ */
-    (function(){
-      const btn = document.querySelector('.hambtn');
-      const mob = document.querySelector('.mobile-nav');
-      btn.addEventListener('click', ()=>{
-        const open = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!open));
-        mob.style.display = open ? 'none' : 'block';
-        mob.setAttribute('aria-hidden', String(open));
+    /***************
+      Behavior & JS
+    ***************/
+
+    // Utility: show one section, hide others
+    function showSection(id){
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      const sec = document.getElementById(id);
+      if(sec) sec.classList.add('active');
+      // update nav active state
+      document.querySelectorAll('.nav-link').forEach(a => {
+        if(a.dataset.show === id) a.style.opacity = '1'; else a.style.opacity = '0.75';
       });
-      // hide mobile nav when clicking outside
-      document.addEventListener('click', (e)=>{
-        if(!mob.contains(e.target) && !btn.contains(e.target) && mob.style.display === 'block'){
-          mob.style.display = 'none'; btn.setAttribute('aria-expanded','false');
-        }
+      // scroll content to top of content area
+      document.getElementById('content').scrollTop = 0;
+    }
+
+    // attach nav links (desktop + left CTAs)
+    document.querySelectorAll('.nav-link').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = a.dataset.show;
+        showSection(id);
+        // if projects -> fetch github repos
+        if(id === 'projects') fetchRepos();
+        // close mobile menu if open
+        closeMobile();
       });
+    });
+
+    // Mobile menu toggle
+    const hamb = document.querySelector('.hamb'), mobileMenu = document.querySelector('.mobile-menu');
+    function closeMobile(){ mobileMenu.style.display = 'none'; hamb.setAttribute('aria-expanded','false') }
+    hamb.addEventListener('click', ()=> {
+      const open = hamb.getAttribute('aria-expanded') === 'true';
+      hamb.setAttribute('aria-expanded', String(!open));
+      mobileMenu.style.display = open ? 'none' : 'block';
+    });
+
+    // close mobile if click outside
+    document.addEventListener('click', (e)=>{
+      if(!mobileMenu.contains(e.target) && !hamb.contains(e.target) && mobileMenu.style.display === 'block') closeMobile();
+    });
+
+    // Avatar: if assets/avatar.jpg exists, load it; otherwise show initials
+    (function loadAvatar(){
+      const img = document.getElementById('avatar-img');
+      const initials = document.getElementById('avatar-initials');
+      img.src = 'assets/avatar.jpg'; // if you add an avatar file, it will show
+      img.onload = ()=>{ img.style.display='block'; initials.style.display='none'; };
+      img.onerror = ()=>{ img.style.display='none'; initials.style.display='block'; };
     })();
 
-    /* ============================
-       REVEAL ON SCROLL
-       ============================ */
-    (function(){
-      const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(en.isIntersecting) en.target.classList.add('show');
-        });
-      }, {threshold:0.12});
-      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-    })();
+    // Fetch GitHub repos and render (public API)
+    async function fetchRepos(){
+      const area = document.getElementById('projects-area');
+      const loading = document.getElementById('repo-loading');
+      loading.textContent = 'Loading repositories from GitHub…';
+      // prevent multiple loads
+      if(area.dataset.loaded === 'true') { loading.style.display='none'; return; }
 
-    /* ============================
-       CARD HOVER TILT (lightweight)
-       ============================ */
-    (function(){
-      const projects = document.querySelectorAll('.project');
-      projects.forEach(card=>{
-        card.addEventListener('mousemove', e=>{
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = `perspective(800px) rotateX(${ -y * 6 }deg) rotateY(${ x * 6 }deg) translateZ(0)`;
-        });
-        card.addEventListener('mouseleave', ()=> card.style.transform = '');
-      });
-    })();
+      try{
+        const resp = await fetch('https://api.github.com/users/R0bin-Pandey/repos?per_page=100&sort=updated');
+        if(!resp.ok) throw new Error('GitHub API error ' + resp.status);
+        const repos = await resp.json();
+        // optionally filter forks / private
+        const filtered = repos.filter(r => !r.fork).slice(0, 12); // show up to 12
+        area.innerHTML = '';
+        if(filtered.length === 0){ area.innerHTML = '<div style="grid-column:1/-1;color:var(--muted)">No public repositories found.</div>'; area.dataset.loaded='true'; return; }
 
-    /* ============================
-       SMOOTH SCROLL + CLOSE MOBILE
-       ============================ */
-    (function(){
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', function(e){
-          const t = document.querySelector(this.getAttribute('href'));
-          if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
-          // close mobile
-          const mob = document.querySelector('.mobile-nav');
-          if(mob.style.display === 'block') mob.style.display = 'none';
+        filtered.forEach(r=>{
+          const el = document.createElement('article');
+          el.className = 'repo-card';
+          el.innerHTML = `
+            <div class="repo-title">${escapeHTML(r.name)}</div>
+            <div class="repo-desc">${escapeHTML(r.description || 'No description — click to open repository.')}</div>
+            <div class="repo-meta">
+              ${r.language ? `<div class="repo-lang">${escapeHTML(r.language)}</div>` : ''}
+              <div style="color:var(--muted); font-weight:700; font-size:13px">⭐ ${r.stargazers_count}</div>
+              <div class="repo-links" style="margin-left:auto">
+                <a href="${r.html_url}" target="_blank" rel="noopener">View</a>
+                ${r.homepage ? `<a href="${r.homepage}" target="_blank" rel="noopener">Demo</a>` : ''}
+              </div>
+            </div>
+            <div class="repo-overlay" aria-hidden="true"><div style="max-width:90%; color:#e6f3ff; font-weight:700">${escapeHTML(r.description || 'No description available.')}</div></div>
+          `;
+          // hover shows overlay (CSS handles), add keyboard accessibility (show overlay on focus)
+          el.tabIndex = 0;
+          el.addEventListener('keypress', (e)=>{ if(e.key === 'Enter') window.open(r.html_url, '_blank'); });
+          area.appendChild(el);
         });
-      });
-    })();
+        area.dataset.loaded = 'true';
+      }catch(err){
+        area.innerHTML = `<div style="grid-column:1/-1; color:#fca5a5">Failed to load repositories: ${escapeHTML(err.message)}</div>`;
+      } finally {
+        if(loading) loading.style.display='none';
+      }
+    }
+
+    // Simple escape to avoid injected strings
+    function escapeHTML(s){
+      return String(s).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])});
+    }
+
+    // On first load, show home. If user clicks projects in header it will fetch.
+    showSection('home');
+
+    // Simple card tilt effect for repo-cards (delegate after fetch)
+    document.addEventListener('mouseover', (e) => {
+      const card = e.target.closest('.repo-card');
+      if(!card) return;
+      card.addEventListener('mousemove', tilt);
+      card.addEventListener('mouseleave', resetTilt);
+      function tilt(ev){
+        const r = card.getBoundingClientRect(), x = (ev.clientX - r.left)/r.width - 0.5, y = (ev.clientY - r.top)/r.height - 0.5;
+        card.style.transform = `perspective(800px) rotateX(${ -y * 6 }deg) rotateY(${ x * 6 }deg) translateZ(0)`;
+      }
+      function resetTilt(){ card.style.transform = ''; card.removeEventListener('mousemove', tilt); card.removeEventListener('mouseleave', resetTilt); }
+    });
+
+    // keyboard: close mobile menu on Escape
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMobile(); });
+
+    // Optionally prefetch repos when user hovers Projects nav (better UX)
+    document.querySelectorAll('[data-show="projects"]').forEach(n=>{
+      n.addEventListener('mouseenter', ()=>{ if(document.getElementById('projects-area').dataset.loaded !== 'true') fetchRepos(); });
+    });
+
+    // When page loads, ensure sections hidden/shown are correct for back/forward navigation if user uses history
+    window.addEventListener('popstate', ()=> {
+      const id = location.hash?.replace('#','') || 'home';
+      showSection(id);
+    });
+
   </script>
 </body>
 </html>
